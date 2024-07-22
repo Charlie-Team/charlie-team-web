@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default function HomePage() {
   return (
     <div
@@ -10,9 +8,9 @@ export default function HomePage() {
         height="600"
         src="https://www.youtube.com/embed/ZkbIR7YjsIo"
         title="YouTube video player"
-        frameborder="0"
+        style={{ border: 'none' }}
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowFullscreen
+        allowFullScreen
       />
     </div>
   );
