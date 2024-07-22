@@ -16,7 +16,7 @@ import Button from '@mui/material/Button';
 import CharlieTeamLogo from '../assets/charlie-team-logo.jpg';
 
 const drawerWidth = 240;
-const navItems = ['About', 'Psychadelics', 'Drones', 'Contact'];
+const navItems = ['About', 'Psychedelics', 'Drones', 'Contact'];
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
