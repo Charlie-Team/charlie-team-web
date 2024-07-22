@@ -1,7 +1,6 @@
 import './App.css';
 import Navbar from './components/Navbar';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import PTSDImage from './assets/ptsd.jpg';
 import HomePage from './components/HomePage';
 
 function App() {

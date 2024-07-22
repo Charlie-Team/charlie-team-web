@@ -15,18 +15,10 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import CharlieTeamLogo from '../assets/charlie-team-logo.jpg';
 
-interface Props {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
-  window?: () => Window;
-}
-
 const drawerWidth = 240;
 const navItems = ['About', 'Psychadelics', 'Drones', 'Contact'];
 
-export default function Navbar(props: Props) {
+export default function Navbar() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
@@ -59,7 +51,7 @@ export default function Navbar(props: Props) {
             component="div"
             sx={{
               flexGrow: 1,
-              display: { sm: 'flex' },
+              display: { sm: 'flex', xs: 'flex' },
               alignItems: 'center',
               textTransform: 'uppercase',
               fontFamily: 'Cinzel, serif',
