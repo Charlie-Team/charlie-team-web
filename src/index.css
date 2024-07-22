@@ -45,6 +45,10 @@ p, h1, h2, h3, h4, h5, h6 {
   isolation: isolate;
 }
 
+html, body, #root {
+  height: 100%;
+}
+
 :root {
   /* Slate Colors */
   --slate-50: #f8fafc;

@@ -24,10 +24,9 @@ interface Props {
 }
 
 const drawerWidth = 240;
-const navItems = ['Home', 'About', 'Contact'];
+const navItems = ['About', 'Psychadelics', 'Drones', 'Contact'];
 
 export default function Navbar(props: Props) {
-  const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
@@ -41,7 +40,7 @@ export default function Navbar(props: Props) {
       <List>
         {navItems.map((item) => (
           <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: 'center' }}>
+            <ListItemButton sx={{ textAlign: 'center', textTransform: 'none' }}>
               <ListItemText primary={item} />
             </ListItemButton>
           </ListItem>
@@ -50,41 +49,52 @@ export default function Navbar(props: Props) {
     </Box>
   );
 
-  const container = window !== undefined ? () => window().document.body : undefined;
-
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ height: '86px' }}>
       <CssBaseline />
-      <AppBar component="nav" sx={{ backgroundColor: 'black'}}>
+      <AppBar component="nav" sx={{ backgroundColor: 'black', padding: '0.5rem' }}>
         <Toolbar>
+          <Typography
+            variant="h6"
+            component="div"
+            sx={{
+              flexGrow: 1,
+              display: { sm: 'flex' },
+              alignItems: 'center',
+              textTransform: 'uppercase',
+              fontFamily: 'Cinzel, serif',
+              fontSize: '1.25rem',
+              columnGap: '1rem',
+              color: '#c0b194'
+            }}
+          >
+            <img src={CharlieTeamLogo} alt="Charlie Team Logo" height={70} width={70} />
+            <div>
+              <div>
+              Charlie Team
+              </div>
+            </div>
+          </Typography>
+          <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+            {navItems.map((item) => (
+              <Button key={item} sx={{ color: '#fff', textTransform: 'none' }}>
+                {item}
+              </Button>
+            ))}
+          </Box>
           <IconButton
             color="inherit"
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: 'none' } }}
+            sx={{ display: { sm: 'none' } }}
           >
             <MenuIcon />
           </IconButton>
-          <Typography
-            variant="h6"
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
-          >
-            <img src={CharlieTeamLogo} alt="Charlie Team Logo" height={60} width={60} />
-          </Typography>
-          <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-            {navItems.map((item) => (
-              <Button key={item} sx={{ color: '#fff' }}>
-                {item}
-              </Button>
-            ))}
-          </Box>
         </Toolbar>
       </AppBar>
       <nav>
         <Drawer
-          container={container}
           variant="temporary"
           open={mobileOpen}
           onClose={handleDrawerToggle}
@@ -99,9 +109,6 @@ export default function Navbar(props: Props) {
           {drawer}
         </Drawer>
       </nav>
-      <Box component="main" sx={{ p: 3 }}>
-        <Toolbar />
-      </Box>
     </Box>
   );
 }
