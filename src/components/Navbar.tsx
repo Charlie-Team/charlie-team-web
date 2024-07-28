@@ -58,46 +58,56 @@ export default function Navbar() {
             component="div"
             sx={{
               flexGrow: 1,
-              display: { sm: 'flex', xs: 'flex' },
+              display: { md: 'flex', xs: 'flex' },
               alignItems: 'center',
-              columnGap: '1rem',
               fontFamily: 'Times, Times New Roman, serif',
-              color: '#fffbeb',
+              color: '#C3B090',
             }}
           >
-            <Link to="/">
+            <Link
+              to="/"
+              style={{
+                display: 'flex',
+                columnGap: '0.5rem',
+                alignItems: 'center',
+                textDecoration: 'none',
+                color: 'inherit',
+              }}
+            >
               <img src={CharlieTeamLogo} alt="Charlie Team Logo" height={45} width={45} />
+              <Box
+                display="flex"
+                flexDirection="column"
+                alignItems="center"
+                justifyContent="center"
+              >
+                <Typography
+                  variant="h1"
+                  style={{
+                    fontSize: '1.5rem',
+                    fontFamily: 'inherit',
+                  }}
+                >
+                  Charlie Team
+                </Typography>
+              </Box>
             </Link>
-            <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center"> 
-              <Typography
-                variant="h1"
-                style={{
-                  fontSize: '1.5rem',
-                  // lineHeight: 1,
-                  fontFamily: 'inherit'
-                }}
-              >
-                Charlie Team 
-              </Typography>
-              {/* <Typography
-                variant="h1"
-                style={{
-                  fontSize: '0.75rem',
-                  // lineHeight: 1,
-                  fontFamily: 'inherit'
-                }}
-              >
-                Consulting
-              </Typography> */}
-            </Box>
           </Typography>
-          <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+          <Box sx={{ display: { xs: 'none', md: 'block' } }}>
             {navItems.map((item) => (
               <Button
                 key={item.name}
                 component={Link}
                 to={item.path}
-                sx={{ color: '#fff', textTransform: 'none' }}
+                sx={{
+                  textTransform: 'none',
+                  color: location.pathname === item.path ? 'var(--green-400)' : '#fffbeb',
+                  borderBottom:
+                    location.pathname === item.path
+                      ? '2px solid var(--green-400)'
+                      : '2px solid transparent',
+                  borderRadius: '0',
+                }}
               >
                 {item.name}
               </Button>
@@ -108,7 +118,7 @@ export default function Navbar() {
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{ display: { sm: 'none' } }}
+            sx={{ display: { md: 'none' } }}
           >
             <MenuIcon />
           </IconButton>
@@ -123,7 +133,7 @@ export default function Navbar() {
             keepMounted: true, // Better open performance on mobile.
           }}
           sx={{
-            display: { xs: 'block', sm: 'none' },
+            display: { xs: 'block', md: 'none' },
             '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
           }}
         >
