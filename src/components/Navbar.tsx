@@ -13,13 +13,17 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import CharlieTeamLogo from '../assets/charlie-team-logo.jpg';
+import CharlieTeamLogo from '../assets/logo.jpg';
+import { Link, useLocation } from 'react-router-dom';
 
 const drawerWidth = 240;
-const navItems = ['About', 'Psychedelics', 'Drones', 'Contact'];
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  const location = useLocation();
+
+  const navItems = getNavItems(location.pathname);
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -31,9 +35,13 @@ export default function Navbar() {
       <Divider />
       <List>
         {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: 'center', textTransform: 'none' }}>
-              <ListItemText primary={item} />
+          <ListItem key={item.name} disablePadding>
+            <ListItemButton
+              component={Link}
+              to={item.path}
+              sx={{ textAlign: 'center', textTransform: 'none' }}
+            >
+              <ListItemText primary={item.name} />
             </ListItemButton>
           </ListItem>
         ))}
@@ -42,35 +50,56 @@ export default function Navbar() {
   );
 
   return (
-    <Box sx={{ height: '86px' }}>
+    <Box sx={{ height: '80px' }}>
       <CssBaseline />
-      <AppBar component="nav" sx={{ backgroundColor: 'black', padding: '0.5rem' }}>
+      <AppBar component="nav" sx={{ backgroundColor: '#022c22', padding: '0.5rem' }}>
         <Toolbar>
           <Typography
-            variant="h6"
             component="div"
             sx={{
               flexGrow: 1,
               display: { sm: 'flex', xs: 'flex' },
               alignItems: 'center',
-              textTransform: 'uppercase',
-              fontFamily: 'Cinzel, serif',
-              fontSize: '1.25rem',
               columnGap: '1rem',
-              color: '#c0b194'
+              fontFamily: 'Times, Times New Roman, serif',
+              color: '#fffbeb',
             }}
           >
-            <img src={CharlieTeamLogo} alt="Charlie Team Logo" height={70} width={70} />
-            <div>
-              <div>
-              Charlie Team
-              </div>
-            </div>
+            <Link to="/">
+              <img src={CharlieTeamLogo} alt="Charlie Team Logo" height={45} width={45} />
+            </Link>
+            <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center"> 
+              <Typography
+                variant="h1"
+                style={{
+                  fontSize: '1.5rem',
+                  // lineHeight: 1,
+                  fontFamily: 'inherit'
+                }}
+              >
+                Charlie Team 
+              </Typography>
+              {/* <Typography
+                variant="h1"
+                style={{
+                  fontSize: '0.75rem',
+                  // lineHeight: 1,
+                  fontFamily: 'inherit'
+                }}
+              >
+                Consulting
+              </Typography> */}
+            </Box>
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (
-              <Button key={item} sx={{ color: '#fff', textTransform: 'none' }}>
-                {item}
+              <Button
+                key={item.name}
+                component={Link}
+                to={item.path}
+                sx={{ color: '#fff', textTransform: 'none' }}
+              >
+                {item.name}
               </Button>
             ))}
           </Box>
@@ -103,4 +132,44 @@ export default function Navbar() {
       </nav>
     </Box>
   );
+}
+
+function getNavItems(pathName: string) {
+  const landingNavItems = [
+    { name: 'Health Care', path: '/health-care' },
+    { name: 'Aviation', path: '/aviation' },
+  ];
+
+  const healthCareNavItems = [
+    { name: 'Mission', path: '/health-care' },
+    { name: 'Research', path: '/health-care/research' },
+    { name: 'Docuseries', path: '/health-care/docuseries' },
+    { name: 'Programs', path: '/health-care/programs' },
+    { name: 'Partners', path: '/health-care/partners' },
+    { name: 'Contact', path: '/health-care/contact' },
+    { name: 'Donate', path: '/health-care/donate' },
+  ];
+
+  const aviationNavItems = [
+    { name: 'Mission', path: '/aviation' },
+    { name: 'Industries', path: '/aviation/industries' },
+    { name: 'Services', path: '/aviation/services' },
+    { name: 'About', path: '/aviation/about' },
+    { name: 'Contact', path: '/aviation/contact' },
+  ];
+
+  switch (true) {
+    case pathName === '/': {
+      return landingNavItems;
+    }
+    case pathName.startsWith('/health-care'): {
+      return healthCareNavItems;
+    }
+    case pathName.startsWith('/aviation'): {
+      return aviationNavItems;
+    }
+    default: {
+      return landingNavItems;
+    }
+  }
 }
